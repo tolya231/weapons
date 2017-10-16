@@ -36,15 +36,15 @@ def get_info(frame, text):
 
 
 def save_tasks():
-    fn = filedialog.SaveAs(root, filetypes=[('*.doc files', '.doc')]).show()
+    fn = filedialog.SaveAs(root, filetypes=[('*.txt files', '.txt')]).show()
     if fn == '':
         return
-    if not fn.endswith(".doc"):
-        fn += ".doc"
+    if not fn.endswith(".txt"):
+        fn += ".txt"
     for i in range(20):
         c1, c2, b1, b2, b3, b4, a1, a2 = task_generator.generate_task()
         task_writer.write_task(fn, c1, c2, b1, b2, b3, b4, a1, a2, i + 1)
-        save_answers(fn.replace(".doc", "_ответы.doc"), c1, c2, b1, b2, b3, b4, a1, a2, i + 1)
+        save_answers(fn.replace(".txt", "_ответы.txt"), c1, c2, b1, b2, b3, b4, a1, a2, i + 1)
 
 
 def save_answers(fn, c1, c2, b1, b2, b3, b4, a1, a2, i):
