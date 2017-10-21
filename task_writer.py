@@ -1,5 +1,5 @@
 import task_generator
-from pulp import *
+from cvxopt.modeling import variable, op
 
 
 def write_task(filename, c1, c2, b1, b2, b3, b4, a1, a2, variant):
@@ -20,7 +20,7 @@ def write_task(filename, c1, c2, b1, b2, b3, b4, a1, a2, variant):
 def write_answer(filename, c1, c2, b1, b2, b3, b4, a1, a2, variant):
     tmp1 = list(a1)
     tmp2 = list(a2)
-    solution = task_generator.solve_task(c1, c2, b1, b2, b3, b4, a1, a2)
+    solution, x = task_generator.solve_task(c1, c2, b1, b2, b3, b4, a1, a2)
     f = open(filename, 'a', encoding="utf-8")
     f.write("Вариант " + str(variant) + "\n")
     f.write(
@@ -33,6 +33,6 @@ def write_answer(filename, c1, c2, b1, b2, b3, b4, a1, a2, variant):
     f.write(
         "Tребуется среди неотрицательных (из смысла задачи ясно, что x1 ≥ 0, х2 ≥ 0) решений системы выбрать такое, при котором выражение принимает максимум.\n")
     f.write("Ответ:\n")
-    for variable in solution.variables():
-        f.write(str(variable.name) + " = " + str(variable.varValue) + "\n")
-    f.write("Целевая функция: " + str(value(solution.objective)) + "\n\n\n")
+    print("___________________")
+    f.write("x1 = " + str(x.value[0]) + ", x2 = " + str(x.value[1]) + "\n")
+    f.write("Целевая функция: " + str(abs(solution.objective.value()[0])) + "\n\n\n")

@@ -1,7 +1,6 @@
-from tkinter import *
-from tkinter import filedialog
 import task_generator
 import task_writer
+from tkinter import filedialog, Tk, Toplevel, Button, Label
 
 root = Tk()
 root.resizable(width=False, height=False)
